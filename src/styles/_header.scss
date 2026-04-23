@@ -36,17 +36,13 @@
     flex: 0 0 auto;
 
     &:hover .site-header__brand-text { color: var(--lime); }
+  }
 
-    .badge {
-      background: var(--lime);
-      color: var(--teal-dark);
-      padding: 0.15rem 0.5rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
+  &__logo {
+    display: block;
+    height: 1.4rem;
+    width: auto;
+    flex: 0 0 auto;
   }
 
   &__brand-text {
