@@ -19,7 +19,15 @@
     pointer-events: none;
   }
 
-  &__inner { position: relative; z-index: 1; }
+  // Needed because .intro-step is a flex container — without width:100%,
+  // .container's max-width lets the inner auto-size to its content's
+  // intrinsic width and get clipped by overflow:hidden on mobile.
+  &__inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-width: 0;
+  }
 
   &__version {
     font-family: var(--font-mono);
@@ -55,6 +63,7 @@
     max-width: 58ch;
     font-size: clamp(1.05rem, 1.6vw, 1.2rem);
     margin-bottom: var(--gap-md);
+    overflow-wrap: break-word;
 
     strong { color: var(--lime); font-weight: 600; }
   }
@@ -62,19 +71,31 @@
   &__actions {
     margin-bottom: var(--gap-lg);
 
-    .btn-primary { font-size: 1rem; padding: 1rem 2rem; }
+    .btn-primary {
+      font-size: 1rem;
+      padding: 1rem 2rem;
+      max-width: 100%;
+    }
+
+    @media (max-width: 520px) {
+      .btn-primary {
+        display: flex;
+        width: 100%;
+        padding: 1rem 1.25rem;
+      }
+    }
   }
 
   &__meta {
     display: grid;
     gap: 1.25rem;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
     border-top: 1px solid rgba(255, 255, 255, 0.18);
     padding-top: var(--gap-md);
     max-width: 800px;
     margin: 0;
 
-    div { margin: 0; }
+    div { margin: 0; min-width: 0; }
 
     dt {
       font-family: var(--font-mono);
@@ -90,6 +111,7 @@
       color: rgba(255, 255, 255, 0.85);
       font-size: 0.92rem;
       line-height: 1.45;
+      overflow-wrap: break-word;
     }
   }
 }
