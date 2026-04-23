@@ -1,0 +1,21 @@
+.site-footer {
+  background: var(--teal-dark);
+  color: rgba(255, 255, 255, 0.75);
+  padding-block: var(--gap-lg);
+  margin-top: var(--gap-xl);
+  font-size: 0.85rem;
+
+  a { color: var(--lime); }
+
+  &__brand {
+    color: var(--text-inverse);
+    font-weight: 600;
+  }
+
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-md);
+    justify-content: space-between;
+  }
+}

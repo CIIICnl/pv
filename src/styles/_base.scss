@@ -1,0 +1,125 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  font-size: 17px;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  color: var(--teal-dark);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  font-weight: 500;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+}
+
+h2 {
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  margin-top: var(--gap-lg);
+  margin-bottom: var(--gap-md);
+  padding-bottom: var(--gap-xs);
+  border-bottom: 2px solid var(--lime);
+}
+
+h3 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  margin-top: var(--gap-md);
+  margin-bottom: var(--gap-sm);
+}
+
+h4 {
+  font-size: 1.1rem;
+  margin-top: var(--gap-md);
+  margin-bottom: var(--gap-xs);
+}
+
+p {
+  margin-bottom: 1rem;
+  max-width: 70ch;
+}
+
+a {
+  color: var(--teal-mid);
+  text-decoration: underline;
+  text-decoration-color: var(--lime);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: color var(--transition);
+
+  &:hover { color: var(--teal-dark); }
+}
+
+ul, ol {
+  margin: 0 0 1rem 1.5rem;
+  padding: 0;
+}
+
+li { margin-bottom: 0.35rem; }
+
+strong { font-weight: 600; }
+em     { font-style: italic; }
+
+:focus-visible {
+  outline: 3px solid var(--lime);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+:focus:not(:focus-visible) { outline: none; }
+
+::selection {
+  background: var(--lime);
+  color: var(--teal-dark);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  padding: 0.6rem 1rem;
+  background: var(--lime);
+  color: var(--teal-dark);
+  font-weight: 600;
+  z-index: 100;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+
+  &:focus { top: 0.5rem; }
+}

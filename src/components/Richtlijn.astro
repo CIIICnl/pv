@@ -1,0 +1,141 @@
+---
+import { richtlijnIntro, waarden, isPar, isUl, isOl } from '../data/pwz';
+import { strings } from '../data/strings';
+import type { Lang } from '../data/i18n';
+
+const s = strings.richtlijn;
+const LANGS: Lang[] = ['nl', 'en'];
+---
+
+<section class="section" id="richtlijn">
+  <div class="container">
+    <span class="section-label" data-lang="nl">{s.sectionLabel.nl}</span>
+    <span class="section-label" data-lang="en">{s.sectionLabel.en}</span>
+
+    <h2 data-lang="nl">{s.title.nl}</h2>
+    <h2 data-lang="en">{s.title.en}</h2>
+
+    <div class="callout" data-lang="nl">
+      <strong>{s.disclaimerLabel.nl}</strong> {s.disclaimer.nl}
+    </div>
+    <div class="callout" data-lang="en">
+      <strong>{s.disclaimerLabel.en}</strong> {s.disclaimer.en}
+    </div>
+
+    <details class="richtlijn-intro">
+      <summary>
+        <span data-lang="nl">{s.introToggle.nl}</span>
+        <span data-lang="en">{s.introToggle.en}</span>
+      </summary>
+      {LANGS.map((lang) => (
+        <div class="richtlijn-intro__body" data-lang={lang}>
+          {richtlijnIntro[lang].map((block) => {
+            if (isPar(block)) return <p>{block}</p>;
+            if (isUl(block)) return <ul>{block.ul.map((it) => <li>{it}</li>)}</ul>;
+            if (isOl(block)) return <ol>{block.ol.map((it) => <li>{it}</li>)}</ol>;
+            return null;
+          })}
+        </div>
+      ))}
+    </details>
+
+    <h3 class="waarden-heading" data-lang="nl">{s.heading.nl}</h3>
+    <h3 class="waarden-heading" data-lang="en">{s.heading.en}</h3>
+
+    <p class="waarden-lead" data-lang="nl">{s.lead.nl}</p>
+    <p class="waarden-lead" data-lang="en">{s.lead.en}</p>
+
+    <div
+      class="waarden-carousel"
+      data-pwz-carousel
+      aria-roledescription="carrousel"
+      aria-label={s.carouselAria.nl}
+      data-aria-label-nl={s.carouselAria.nl}
+      data-aria-label-en={s.carouselAria.en}
+    >
+      <div class="waarden-carousel__viewport">
+        <ol class="waarden-carousel__track" data-pwz-carousel-track>
+          {waarden.map((w, i) => (
+            <li
+              class="waarden-carousel__slide"
+              data-pwz-carousel-slide={i}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${w.number} van ${waarden.length}: ${w.title.nl}`}
+              data-aria-label-nl={`${w.number} van ${waarden.length}: ${w.title.nl}`}
+              data-aria-label-en={`${w.number} of ${waarden.length}: ${w.title.en}`}
+              aria-hidden={i === 0 ? 'false' : 'true'}
+            >
+              <article class="waarde" id={w.id}>
+                <div class="waarde__head">
+                  <span class="waarde__num" data-lang="nl">{s.waardeNum.nl(w.number, waarden.length)}</span>
+                  <span class="waarde__num" data-lang="en">{s.waardeNum.en(w.number, waarden.length)}</span>
+                  <h4 class="waarde__title" data-lang="nl">{w.title.nl}</h4>
+                  <h4 class="waarde__title" data-lang="en">{w.title.en}</h4>
+                </div>
+                {LANGS.map((lang) => (
+                  <div class="waarde__body" data-lang={lang}>
+                    {w.blocks[lang].map((block) => {
+                      if (isPar(block)) return <p>{block}</p>;
+                      if (isUl(block)) return <ul>{block.ul.map((it) => <li>{it}</li>)}</ul>;
+                      if (isOl(block)) return <ol>{block.ol.map((it) => <li>{it}</li>)}</ol>;
+                      return null;
+                    })}
+                  </div>
+                ))}
+              </article>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="waarden-carousel__controls">
+        <button
+          type="button"
+          class="waarden-carousel__arrow"
+          data-pwz-carousel-prev
+          aria-label={s.prev.nl}
+          data-aria-label-nl={s.prev.nl}
+          data-aria-label-en={s.prev.en}
+        >
+          <span aria-hidden="true">←</span>
+        </button>
+
+        <ol
+          class="waarden-carousel__dots"
+          aria-label={s.dotsAria.nl}
+          data-aria-label-nl={s.dotsAria.nl}
+          data-aria-label-en={s.dotsAria.en}
+        >
+          {waarden.map((w) => (
+            <li>
+              <button
+                type="button"
+                class="waarden-carousel__dot"
+                data-pwz-carousel-goto={w.number - 1}
+                aria-label={`Waarde ${w.number}: ${w.title.nl}`}
+                data-aria-label-nl={`Waarde ${w.number}: ${w.title.nl}`}
+                data-aria-label-en={`Value ${w.number}: ${w.title.en}`}
+              >
+                <span class="waarden-carousel__dot-num">{w.number}</span>
+                <span class="waarden-carousel__dot-label" data-lang="nl">{w.title.nl}</span>
+                <span class="waarden-carousel__dot-label" data-lang="en">{w.title.en}</span>
+              </button>
+            </li>
+          ))}
+        </ol>
+
+        <button
+          type="button"
+          class="waarden-carousel__arrow"
+          data-pwz-carousel-next
+          aria-label={s.next.nl}
+          data-aria-label-nl={s.next.nl}
+          data-aria-label-en={s.next.en}
+        >
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,53 @@
+---
+import { openVraag, waarden } from '../data/pwz';
+import { strings } from '../data/strings';
+
+const s = strings.open;
+---
+
+<section class="section" id="open-vraag">
+  <div class="container">
+    <span class="section-label" data-lang="nl">{s.sectionLabel.nl}</span>
+    <span class="section-label" data-lang="en">{s.sectionLabel.en}</span>
+
+    <h2 data-lang="nl">{s.title.nl}</h2>
+    <h2 data-lang="en">{s.title.en}</h2>
+
+    <p data-lang="nl">{openVraag.intro.nl}</p>
+    <p data-lang="en">{openVraag.intro.en}</p>
+
+    <div class="question">
+      <div class="field">
+        <label class="field-label" for="open-waarde" data-lang="nl">{s.waardeLabel.nl}</label>
+        <label class="field-label" for="open-waarde" data-lang="en">{s.waardeLabel.en}</label>
+        <select class="input" id="open-waarde" name="open-waarde" data-pwz-field>
+          <option
+            value=""
+            data-label-nl={s.waardePlaceholder.nl}
+            data-label-en={s.waardePlaceholder.en}
+          >{s.waardePlaceholder.nl}</option>
+          {waarden.map((w) => (
+            <option
+              value={w.title.nl}
+              data-label-nl={w.title.nl}
+              data-label-en={w.title.en}
+            >{w.title.nl}</option>
+          ))}
+        </select>
+      </div>
+      <div class="field">
+        <label class="field-label" for="open-toelichting" data-lang="nl">{s.toelichtingLabel.nl}</label>
+        <label class="field-label" for="open-toelichting" data-lang="en">{s.toelichtingLabel.en}</label>
+        <textarea
+          class="textarea"
+          id="open-toelichting"
+          name="open-toelichting"
+          rows={10}
+          data-pwz-field
+        ></textarea>
+        <span class="field-help" data-lang="nl">{openVraag.hint.nl}</span>
+        <span class="field-help" data-lang="en">{openVraag.hint.en}</span>
+      </div>
+    </div>
+  </div>
+</section>

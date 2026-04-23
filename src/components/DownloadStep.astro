@@ -1,0 +1,77 @@
+---
+import StepFooter from './StepFooter.astro';
+import { strings } from '../data/strings';
+import { TOTAL_STEPS, prevLabel } from '../data/steps';
+
+const s = strings.download;
+const r = strings.resume;
+---
+
+<section class="section download-step" id="download">
+  <div class="container">
+    <span class="section-label" data-lang="nl">{s.sectionLabel.nl}</span>
+    <span class="section-label" data-lang="en">{s.sectionLabel.en}</span>
+
+    <h2 data-lang="nl">{s.title.nl}</h2>
+    <h2 data-lang="en">{s.title.en}</h2>
+
+    <p data-lang="nl">{s.lead.nl}</p>
+    <p data-lang="en">{s.lead.en}</p>
+
+    <div class="download-summary" id="pwz-status" aria-live="polite" aria-atomic="true">
+      <span class="download-summary__row" data-pwz-status-signed data-state="warn">
+        <span
+          data-pwz-status-signed-label
+          data-label-warn-nl={s.statusSignedLabel.nl}
+          data-label-warn-en={s.statusSignedLabel.en}
+        >{s.statusSignedLabel.nl}</span>
+        <strong>
+          <span data-pwz-status-signed-count>0</span>/<span data-pwz-status-signed-total>0</span>
+        </strong>
+        <button
+          type="button"
+          class="link-btn"
+          data-pwz-step-goto="4"
+          data-pwz-status-signed-goto
+        >
+          <span data-lang="nl">{s.statusSignedGoto.nl}</span>
+          <span data-lang="en">{s.statusSignedGoto.en}</span>
+        </button>
+      </span>
+      <span class="download-summary__row">
+        <span data-lang="nl">{s.statusOpenAnswers.nl}</span>
+        <span data-lang="en">{s.statusOpenAnswers.en}</span>
+        <strong>
+          <span data-pwz-status-filled>0</span>/<span data-pwz-status-filled-total>0</span>
+        </strong>
+      </span>
+    </div>
+
+    <div class="download-actions">
+      <button class="btn btn-ghost" id="pwz-reset" type="button">
+        <span data-lang="nl">{s.reset.nl}</span>
+        <span data-lang="en">{s.reset.en}</span>
+      </button>
+      <button class="btn btn-ghost" id="pwz-save-resume" type="button">
+        <span data-lang="nl">{r.button.nl}</span>
+        <span data-lang="en">{r.button.en}</span>
+      </button>
+      <button class="btn btn-primary" id="pwz-download" type="button" disabled aria-describedby="pwz-status">
+        <span data-lang="nl">{s.download.nl}</span>
+        <span data-lang="en">{s.download.en}</span>
+      </button>
+    </div>
+  </div>
+
+  <StepFooter current={TOTAL_STEPS} total={TOTAL_STEPS} prevLabel={prevLabel(TOTAL_STEPS)}>
+    <button
+      type="button"
+      class="btn btn-ghost"
+      data-pwz-step-goto="1"
+      slot="extra"
+    >
+      <span data-lang="nl">{s.restart.nl}</span>
+      <span data-lang="en">{s.restart.en}</span>
+    </button>
+  </StepFooter>
+</section>

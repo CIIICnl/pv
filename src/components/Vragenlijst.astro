@@ -1,0 +1,117 @@
+---
+import { categorieen } from '../data/pwz';
+import { strings } from '../data/strings';
+import YesNoFollowup from './YesNoFollowup.astro';
+
+const s = strings.vragen;
+---
+
+<section class="section" id="vragen">
+  <div class="container">
+    <span class="section-label" data-lang="nl">{s.sectionLabel.nl}</span>
+    <span class="section-label" data-lang="en">{s.sectionLabel.en}</span>
+
+    <h2 data-lang="nl">{s.title.nl}</h2>
+    <h2 data-lang="en">{s.title.en}</h2>
+
+    <p data-lang="nl">{s.lead.nl}</p>
+    <p data-lang="en">{s.lead.en}</p>
+
+    {categorieen.map((cat) => (
+      <div class="vraag-cat">
+        <h3 data-lang="nl">{cat.number}. {cat.title.nl}</h3>
+        <h3 data-lang="en">{cat.number}. {cat.title.en}</h3>
+
+        {cat.vragen.map((v) => {
+          const promptId = v.yesno ? `${v.id}-prompt` : undefined;
+          const promptIdNl = promptId ? `${promptId}-nl` : undefined;
+          const promptIdEn = promptId ? `${promptId}-en` : undefined;
+          return (
+            <div class="question" id={v.id}>
+              <div class="question-number">
+                <span data-lang="nl">{s.questionPrefix.nl} {v.number}</span>
+                <span data-lang="en">{s.questionPrefix.en} {v.number}</span>
+              </div>
+
+              {v.intro && (
+                <>
+                  <p class="question-prompt" data-lang="nl">{v.intro.nl}</p>
+                  <p class="question-prompt" data-lang="en">{v.intro.en}</p>
+                </>
+              )}
+
+              {v.bullets && (
+                <>
+                  <ul data-lang="nl">
+                    {v.bullets.nl.map((b) => <li>{b}</li>)}
+                  </ul>
+                  <ul data-lang="en">
+                    {v.bullets.en.map((b) => <li>{b}</li>)}
+                  </ul>
+                </>
+              )}
+
+              {v.field && (
+                <div class="field">
+                  <label class="field-label" for={v.field.id} data-lang="nl">{v.field.label.nl}</label>
+                  <label class="field-label" for={v.field.id} data-lang="en">{v.field.label.en}</label>
+                  <textarea
+                    class="textarea"
+                    id={v.field.id}
+                    name={v.field.id}
+                    rows={v.field.rows ?? 5}
+                    data-pwz-field
+                  ></textarea>
+                </div>
+              )}
+
+              {v.yesno && (
+                <div class="yesno-block" data-pwz-yesno-block={v.id}>
+                  <p class="question-prompt" id={promptIdNl} data-lang="nl">{v.yesno.prompt.nl}</p>
+                  <p class="question-prompt" id={promptIdEn} data-lang="en">{v.yesno.prompt.en}</p>
+                  <div
+                    class="choice-group"
+                    role="radiogroup"
+                    aria-label={s.answerAria.nl(v.number)}
+                    data-aria-label-nl={s.answerAria.nl(v.number)}
+                    data-aria-label-en={s.answerAria.en(v.number)}
+                  >
+                    <label class="choice">
+                      <input
+                        type="radio"
+                        name={`${v.id}-keuze`}
+                        value="ja"
+                        data-pwz-field
+                        data-pwz-yesno-trigger={v.id}
+                      />
+                      <span data-lang="nl">{s.yes.nl}</span>
+                      <span data-lang="en">{s.yes.en}</span>
+                    </label>
+                    <label class="choice">
+                      <input
+                        type="radio"
+                        name={`${v.id}-keuze`}
+                        value="nee"
+                        data-pwz-field
+                        data-pwz-yesno-trigger={v.id}
+                      />
+                      <span data-lang="nl">{s.no.nl}</span>
+                      <span data-lang="en">{s.no.en}</span>
+                    </label>
+                  </div>
+
+                  {v.yesno.onYes && v.yesno.onYes.length > 0 && (
+                    <YesNoFollowup vraagId={v.id} when="ja" fields={v.yesno.onYes} />
+                  )}
+                  {v.yesno.onNo && v.yesno.onNo.length > 0 && (
+                    <YesNoFollowup vraagId={v.id} when="nee" fields={v.yesno.onNo} />
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    ))}
+  </div>
+</section>

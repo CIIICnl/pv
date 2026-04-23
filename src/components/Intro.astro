@@ -1,0 +1,48 @@
+---
+import { appMeta } from '../data/app-meta';
+import { strings } from '../data/strings';
+
+const s = strings.intro;
+---
+
+<section class="intro-step" id="intro">
+  <div class="container intro-step__inner">
+    <span class="intro-step__version" data-lang="nl">{appMeta.versionLine.nl}</span>
+    <span class="intro-step__version" data-lang="en">{appMeta.versionLine.en}</span>
+
+    <h1 class="intro-step__title" data-lang="nl">{appMeta.name.nl}</h1>
+    <h1 class="intro-step__title" data-lang="en">{appMeta.name.en}</h1>
+
+    <p class="intro-step__lead" data-lang="nl" set:html={s.lead.nl}></p>
+    <p class="intro-step__lead" data-lang="en" set:html={s.lead.en}></p>
+
+    <div class="intro-step__actions">
+      <button type="button" class="btn btn-primary" data-pwz-step-goto="2">
+        <span data-lang="nl">{s.cta.nl}</span>
+        <span data-lang="en">{s.cta.en}</span>
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
+
+    <dl class="intro-step__meta">
+      <div>
+        <dt data-lang="nl">{s.metaAuthorsLabel.nl}</dt>
+        <dt data-lang="en">{s.metaAuthorsLabel.en}</dt>
+        <dd data-lang="nl">{s.metaAuthors.nl}</dd>
+        <dd data-lang="en">{s.metaAuthors.en}</dd>
+      </div>
+      <div>
+        <dt data-lang="nl">{s.metaClientLabel.nl}</dt>
+        <dt data-lang="en">{s.metaClientLabel.en}</dt>
+        <dd data-lang="nl">{s.metaClient.nl}</dd>
+        <dd data-lang="en">{s.metaClient.en}</dd>
+      </div>
+      <div>
+        <dt data-lang="nl">{s.metaProgrammeLabel.nl}</dt>
+        <dt data-lang="en">{s.metaProgrammeLabel.en}</dt>
+        <dd data-lang="nl">{s.metaProgramme.nl}</dd>
+        <dd data-lang="en">{s.metaProgramme.en}</dd>
+      </div>
+    </dl>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+---
+import { projectMeta } from '../data/pwz';
+import { strings } from '../data/strings';
+
+const s = strings.project;
+---
+
+<section class="section" id="metadata">
+  <div class="container">
+    <span class="section-label" data-lang="nl">{s.sectionLabel.nl}</span>
+    <span class="section-label" data-lang="en">{s.sectionLabel.en}</span>
+
+    <h2 data-lang="nl">{s.title.nl}</h2>
+    <h2 data-lang="en">{s.title.en}</h2>
+
+    <p data-lang="nl">{s.lead.nl}</p>
+    <p data-lang="en">{s.lead.en}</p>
+
+    <div class="question">
+      {projectMeta.map((f) => (
+        <div class="field">
+          <label class="field-label" for={f.id} data-lang="nl">{f.label.nl}</label>
+          <label class="field-label" for={f.id} data-lang="en">{f.label.en}</label>
+          <input
+            class="input"
+            type={f.type ?? 'text'}
+            id={f.id}
+            name={f.id}
+            autocomplete={f.autocomplete ?? 'off'}
+            data-pwz-field
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

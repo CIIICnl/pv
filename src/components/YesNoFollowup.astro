@@ -1,0 +1,27 @@
+---
+import type { TextField } from '../data/pwz';
+
+interface Props {
+  vraagId: string;
+  when: 'ja' | 'nee';
+  fields: TextField[];
+}
+
+const { vraagId, when, fields } = Astro.props;
+---
+
+<div class="followup" data-pwz-yesno-followup={vraagId} data-pwz-yesno-when={when} hidden>
+  {fields.map((f) => (
+    <div class="field">
+      <label class="field-label" for={f.id} data-lang="nl">{f.label.nl}</label>
+      <label class="field-label" for={f.id} data-lang="en">{f.label.en}</label>
+      <textarea
+        class="textarea"
+        id={f.id}
+        name={f.id}
+        rows={f.rows ?? 4}
+        data-pwz-field
+      ></textarea>
+    </div>
+  ))}
+</div>

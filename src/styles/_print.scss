@@ -1,0 +1,38 @@
+@media print {
+  .site-header,
+  .progress-nav,
+  .step-footer,
+  .site-footer,
+  .download-actions,
+  .waarden-carousel__controls,
+  .pwz-dialog { display: none; }
+
+  .steps > .step[hidden] { display: block !important; }
+
+  .intro-step {
+    background: none;
+    color: var(--text);
+    padding-block: 0 1rem;
+    min-height: 0;
+
+    &__title,
+    &__lead,
+    &__version { color: var(--text); }
+
+    &__meta {
+      dt, dd { color: var(--text); }
+    }
+  }
+
+  .waarden-carousel__track {
+    transform: none !important;
+    flex-direction: column;
+  }
+
+  .waarden-carousel__slide[aria-hidden='true'] { display: block !important; }
+
+  body { background: white; font-size: 11pt; }
+
+  .question { break-inside: avoid; border-color: #999; }
+  .waarden-carousel__slide { break-inside: avoid; }
+}

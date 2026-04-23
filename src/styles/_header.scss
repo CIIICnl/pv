@@ -1,0 +1,141 @@
+.site-header {
+  background: var(--teal-dark);
+  color: var(--text-inverse);
+  padding: 0.6rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 3px solid var(--lime);
+
+  // Header chrome spans the full viewport so the progress nav has room
+  // for labels on common laptop widths — body copy still uses the
+  // narrower reading column via `container-wide` elsewhere.
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 2.4rem;
+    max-width: none;
+  }
+
+  &__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--text-inverse);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    flex: 0 0 auto;
+
+    &:hover .site-header__brand-text { color: var(--lime); }
+
+    .badge {
+      background: var(--lime);
+      color: var(--teal-dark);
+      padding: 0.15rem 0.5rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+  }
+
+  &__brand-text {
+    transition: color var(--transition);
+  }
+
+  @media (max-width: 540px) {
+    &__brand-text { display: none; }
+  }
+}
+
+.progress-nav {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  justify-content: flex-end;
+
+  ol {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.3rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar { display: none; }
+  }
+
+  li {
+    margin: 0;
+    flex: 0 0 auto;
+  }
+
+  &__step {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.25rem 0.7rem 0.25rem 0.3rem;
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all var(--transition);
+    white-space: nowrap;
+
+    &:hover {
+      color: var(--lime);
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    &[aria-current='step'] {
+      background: var(--lime);
+      color: var(--teal-dark);
+      border-color: var(--lime);
+
+      .progress-nav__num {
+        background: var(--teal-dark);
+        color: var(--lime);
+      }
+    }
+  }
+
+  &__num {
+    display: inline-grid;
+    place-items: center;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0;
+  }
+
+  &__label { display: none; }
+
+  // Labels only appear once the viewport is wide enough to fit brand +
+  // 7 label-pills + lang switcher without clipping. Below this the nav
+  // falls back to a compact numbers-only row.
+  @media (min-width: 1180px) {
+    &__label { display: inline-block; }
+    &__step { padding: 0.3rem 0.85rem 0.3rem 0.35rem; font-size: 0.72rem; }
+  }
+}

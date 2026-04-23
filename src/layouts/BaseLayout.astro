@@ -1,0 +1,149 @@
+---
+import { steps } from '../data/steps';
+import { appMeta } from '../data/app-meta';
+import { strings } from '../data/strings';
+import { LANGS } from '../data/i18n';
+
+interface Props {
+  titleNl?: string;
+  titleEn?: string;
+}
+
+const { titleNl, titleEn } = Astro.props as Props;
+const defaultTitleNl = `${appMeta.name.nl} — ${appMeta.org}`;
+const defaultTitleEn = `${appMeta.name.en} — ${appMeta.org}`;
+const headTitle = titleNl ?? defaultTitleNl;
+---
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={strings.meta.description.nl} data-desc-nl={strings.meta.description.nl} data-desc-en={strings.meta.description.en} />
+
+    <meta property="og:title" content={headTitle} />
+    <meta property="og:description" content={strings.meta.description.nl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={strings.meta.siteName.nl} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/fonts/GT-America-Extended-Bold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/GT-America-Extended-Medium.woff2" as="font" type="font/woff2" crossorigin />
+
+    <title
+      data-title-nl={titleNl ?? defaultTitleNl}
+      data-title-en={titleEn ?? defaultTitleEn}
+    >{headTitle}</title>
+
+    <script is:inline>
+      // Bootstrap language before first paint so the correct strings are
+      // visible immediately (no flash of the wrong language).
+      (function () {
+        try {
+          var stored = localStorage.getItem('pwz-lang-v1');
+          var lang = stored === 'en' || stored === 'nl' ? stored : 'nl';
+          document.documentElement.lang = lang;
+        } catch (_) { /* ignore */ }
+      })();
+    </script>
+  </head>
+  <body>
+    <a href="#hoofd" class="skip-link">
+      <span data-lang="nl">{strings.header.skip.nl}</span>
+      <span data-lang="en">{strings.header.skip.en}</span>
+    </a>
+
+    <header class="site-header">
+      <div class="container-wide site-header__inner">
+        <button
+          type="button"
+          class="site-header__brand"
+          data-pwz-step-goto="1"
+          aria-label={strings.header.brandAriaLabel.nl}
+          data-aria-label-nl={strings.header.brandAriaLabel.nl}
+          data-aria-label-en={strings.header.brandAriaLabel.en}
+        >
+          <span class="badge">{appMeta.org}</span>
+          <span class="site-header__brand-text" data-lang="nl">{appMeta.shortName.nl}</span>
+          <span class="site-header__brand-text" data-lang="en">{appMeta.shortName.en}</span>
+        </button>
+
+        <nav
+          class="progress-nav progress-nav--header"
+          aria-label={strings.header.nav.nl}
+          data-aria-label-nl={strings.header.nav.nl}
+          data-aria-label-en={strings.header.nav.en}
+        >
+          <ol>
+            {steps.map((s) => (
+              <li>
+                <button
+                  type="button"
+                  class="progress-nav__step"
+                  data-pwz-step-nav={s.id}
+                  aria-current={s.id === 1 ? 'step' : undefined}
+                >
+                  <span class="progress-nav__num">{s.id}</span>
+                  <span class="progress-nav__label" data-lang="nl">{s.label.nl}</span>
+                  <span class="progress-nav__label" data-lang="en">{s.label.en}</span>
+                </button>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <div
+          class="lang-switcher"
+          role="group"
+          aria-label={strings.header.langSwitcher.nl}
+          data-aria-label-nl={strings.header.langSwitcher.nl}
+          data-aria-label-en={strings.header.langSwitcher.en}
+        >
+          {LANGS.map((l, i) => (
+            <>
+              {i > 0 && <span class="lang-switcher__sep" aria-hidden="true">/</span>}
+              <button
+                type="button"
+                class="lang-switcher__btn"
+                data-pwz-lang={l.id}
+                aria-pressed={l.id === 'nl' ? 'true' : 'false'}
+                title={l.name}
+              >{l.label}</button>
+            </>
+          ))}
+        </div>
+      </div>
+    </header>
+
+    <main id="hoofd" tabindex="-1">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container-wide site-footer__inner">
+        <div data-lang="nl">
+          <strong class="site-footer__brand">{strings.meta.siteName.nl}</strong><br />
+          {appMeta.versionLine.nl}<br />
+          Opgesteld door {appMeta.authors.nl} in opdracht van {appMeta.org}.
+        </div>
+        <div data-lang="en">
+          <strong class="site-footer__brand">{strings.meta.siteName.en}</strong><br />
+          {appMeta.versionLine.en}<br />
+          Prepared by {appMeta.authors.en}, commissioned by {appMeta.org}.
+        </div>
+        <div>
+          <a href={appMeta.urls.site}>{appMeta.urls.siteLabel}</a> ·
+          <a href={appMeta.urls.source}>
+            <span data-lang="nl">{appMeta.urls.sourceLabel.nl}</span>
+            <span data-lang="en">{appMeta.urls.sourceLabel.en}</span>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <style is:global lang="scss">
+      @use '../styles/global.scss';
+    </style>
+  </body>
+</html>

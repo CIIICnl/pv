@@ -1,0 +1,46 @@
+---
+import type { Translatable } from '../data/i18n';
+
+interface Props {
+  current: number;
+  total: number;
+  prevLabel?: Translatable;
+  nextLabel?: Translatable;
+}
+
+const DEFAULT_BACK: Translatable = { nl: 'Terug', en: 'Back' };
+const DEFAULT_NEXT: Translatable = { nl: 'Volgende', en: 'Next' };
+
+const {
+  current,
+  total,
+  prevLabel = DEFAULT_BACK,
+  nextLabel = DEFAULT_NEXT,
+} = Astro.props;
+
+const hasPrev = current > 1;
+const hasNext = current < total;
+const hasExtra = Astro.slots.has('extra');
+---
+
+<div class="step-footer container">
+  {hasPrev && (
+    <button type="button" class="btn btn-ghost step-footer__prev" data-pwz-step-prev>
+      <span aria-hidden="true">←</span>
+      <span data-lang="nl">{prevLabel.nl}</span>
+      <span data-lang="en">{prevLabel.en}</span>
+    </button>
+  )}
+  {hasExtra && (
+    <div class="step-footer__extra">
+      <slot name="extra" />
+    </div>
+  )}
+  {hasNext && (
+    <button type="button" class="btn btn-primary step-footer__next" data-pwz-step-next>
+      <span data-lang="nl">{nextLabel.nl}</span>
+      <span data-lang="en">{nextLabel.en}</span>
+      <span aria-hidden="true">→</span>
+    </button>
+  )}
+</div>

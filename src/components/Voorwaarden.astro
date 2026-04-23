@@ -1,0 +1,52 @@
+---
+import { voorwaarden } from '../data/pwz';
+import { strings } from '../data/strings';
+
+const s = strings.voorwaarden;
+---
+
+<section class="section" id="zelftoets">
+  <div class="container">
+    <span class="section-label" data-lang="nl">{s.sectionLabel.nl}</span>
+    <span class="section-label" data-lang="en">{s.sectionLabel.en}</span>
+
+    <h2 data-lang="nl">{s.title.nl}</h2>
+    <h2 data-lang="en">{s.title.en}</h2>
+
+    <p data-lang="nl">{s.lead.nl}</p>
+    <p data-lang="en">{s.lead.en}</p>
+
+    <fieldset
+      class="question voorwaarden-fieldset"
+      id="voorwaarden"
+      aria-describedby="voorwaarden-error"
+      aria-invalid="true"
+    >
+      <legend class="visually-hidden" data-lang="nl">{s.legend.nl}</legend>
+      <legend class="visually-hidden" data-lang="en">{s.legend.en}</legend>
+      {voorwaarden.nl.map((_, i) => {
+        const id = `voorwaarde-${i + 1}`;
+        return (
+          <label class="choice" for={id}>
+            <input
+              type="checkbox"
+              id={id}
+              name={id}
+              data-pwz-field
+              data-pwz-required
+            />
+            <span data-lang="nl">{voorwaarden.nl[i]}</span>
+            <span data-lang="en">{voorwaarden.en[i]}</span>
+          </label>
+        );
+      })}
+      <p
+        id="voorwaarden-error"
+        class="field-error"
+        data-pwz-voorwaarden-error
+        role="status"
+        aria-live="polite"
+      ></p>
+    </fieldset>
+  </div>
+</section>

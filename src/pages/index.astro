@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Intro from '../components/Intro.astro';
+import Richtlijn from '../components/Richtlijn.astro';
+import ProjectMeta from '../components/ProjectMeta.astro';
+import Voorwaarden from '../components/Voorwaarden.astro';
+import Vragenlijst from '../components/Vragenlijst.astro';
+import OpenVraag from '../components/OpenVraag.astro';
+import DownloadStep from '../components/DownloadStep.astro';
+import StepFooter from '../components/StepFooter.astro';
+import { steps, TOTAL_STEPS, prevLabel, nextLabel } from '../data/steps';
+import { appMeta } from '../data/app-meta';
+
+const stepComponents = {
+  1: Intro,
+  2: Richtlijn,
+  3: ProjectMeta,
+  4: Voorwaarden,
+  5: Vragenlijst,
+  6: OpenVraag,
+  7: DownloadStep,
+} as const;
+
+type StepId = keyof typeof stepComponents;
+---
+
+<BaseLayout
+  titleNl={`${appMeta.name.nl} — ${appMeta.org}`}
+  titleEn={`${appMeta.name.en} — ${appMeta.org}`}
+>
+  <div class="steps">
+    {steps.map((s) => {
+      const Step = stepComponents[s.id as StepId];
+      const showFooter = s.id > 1 && s.id < TOTAL_STEPS;
+      const isIntro = s.id === 1;
+      return (
+        <div
+          class:list={['step', isIntro && 'step--intro']}
+          data-pwz-step={s.id}
+          hidden={!isIntro}
+        >
+          <Step />
+          {showFooter && (
+            <StepFooter
+              current={s.id}
+              total={TOTAL_STEPS}
+              prevLabel={prevLabel(s.id)}
+              nextLabel={nextLabel(s.id)}
+            />
+          )}
+        </div>
+      );
+    })}
+  </div>
+
+  <script>
+    import { initForm } from '../scripts/form';
+    initForm();
+  </script>
+</BaseLayout>
