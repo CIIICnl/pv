@@ -5,6 +5,7 @@ import { TOTAL_STEPS, prevLabel } from '../data/steps';
 
 const s = strings.download;
 const r = strings.resume;
+const sig = strings.signature;
 ---
 
 <section class="section download-step" id="download">
@@ -17,6 +18,83 @@ const r = strings.resume;
 
     <p data-lang="nl">{s.lead.nl}</p>
     <p data-lang="en">{s.lead.en}</p>
+
+    <section class="signature-card" aria-labelledby="pwz-sig-heading">
+      <span class="signature-card__label" data-lang="nl">{sig.sectionLabel.nl}</span>
+      <span class="signature-card__label" data-lang="en">{sig.sectionLabel.en}</span>
+
+      <h3 id="pwz-sig-heading" class="signature-card__title">
+        <span data-lang="nl">{sig.title.nl}</span>
+        <span data-lang="en">{sig.title.en}</span>
+      </h3>
+
+      <p class="signature-card__lead">
+        <span data-lang="nl">{sig.lead.nl}</span>
+        <span data-lang="en">{sig.lead.en}</span>
+      </p>
+
+      <dl class="signature-card__meta">
+        <div class="signature-card__row">
+          <dt>
+            <span data-lang="nl">{sig.nameLabel.nl}</span>
+            <span data-lang="en">{sig.nameLabel.en}</span>
+          </dt>
+          <dd data-pwz-sig-name data-state="warn">
+            <span data-lang="nl">{sig.missingValue.nl}</span>
+            <span data-lang="en">{sig.missingValue.en}</span>
+          </dd>
+        </div>
+        <div class="signature-card__row">
+          <dt>
+            <span data-lang="nl">{sig.roleLabel.nl}</span>
+            <span data-lang="en">{sig.roleLabel.en}</span>
+          </dt>
+          <dd data-pwz-sig-roleorg>
+            <span data-lang="nl">{sig.missingValue.nl}</span>
+            <span data-lang="en">{sig.missingValue.en}</span>
+          </dd>
+        </div>
+        <div class="signature-card__row">
+          <dt>
+            <span data-lang="nl">{sig.dateLabel.nl}</span>
+            <span data-lang="en">{sig.dateLabel.en}</span>
+          </dt>
+          <dd data-pwz-sig-date>
+            <span data-lang="nl">{sig.missingValue.nl}</span>
+            <span data-lang="en">{sig.missingValue.en}</span>
+          </dd>
+        </div>
+      </dl>
+
+      <p class="signature-card__notice" data-pwz-sig-missing hidden>
+        <span data-lang="nl">{sig.missingNameNotice.nl}</span>
+        <span data-lang="en">{sig.missingNameNotice.en}</span>
+        <button type="button" class="link-btn" data-pwz-step-goto="3">
+          <span data-lang="nl">{sig.editAtProject.nl}</span>
+          <span data-lang="en">{sig.editAtProject.en}</span>
+        </button>
+      </p>
+
+      <label class="choice signature-card__confirm" for="sign-confirm">
+        <input
+          type="checkbox"
+          id="sign-confirm"
+          name="sign-confirm"
+          data-pwz-field
+          data-pwz-sig-checkbox
+          disabled
+        />
+        <span data-pwz-sig-confirm-label>
+          <span data-lang="nl">{sig.confirmLabel.nl('')}</span>
+          <span data-lang="en">{sig.confirmLabel.en('')}</span>
+        </span>
+      </label>
+
+      <p class="signature-card__help">
+        <span data-lang="nl">{sig.confirmHelp.nl}</span>
+        <span data-lang="en">{sig.confirmHelp.en}</span>
+      </p>
+    </section>
 
     <div class="download-summary" id="pwz-status" aria-live="polite" aria-atomic="true">
       <span class="download-summary__row" data-pwz-status-signed data-state="warn">
@@ -43,6 +121,14 @@ const r = strings.resume;
         <span data-lang="en">{s.statusOpenAnswers.en}</span>
         <strong>
           <span data-pwz-status-filled>0</span>/<span data-pwz-status-filled-total>0</span>
+        </strong>
+      </span>
+      <span class="download-summary__row" data-pwz-status-signature data-state="warn">
+        <span data-lang="nl">{s.statusSignatureLabel.nl}</span>
+        <span data-lang="en">{s.statusSignatureLabel.en}</span>
+        <strong data-pwz-status-signature-value>
+          <span data-lang="nl">{s.statusSignatureWaiting.nl}</span>
+          <span data-lang="en">{s.statusSignatureWaiting.en}</span>
         </strong>
       </span>
     </div>

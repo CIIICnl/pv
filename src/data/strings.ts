@@ -146,6 +146,18 @@ export const strings = {
       nl: 'Open antwoorden ingevuld:',
       en: 'Open answers filled in:',
     } as Translatable,
+    statusSignatureLabel: {
+      nl: 'Ondertekening:',
+      en: 'Signing:',
+    } as Translatable,
+    statusSignatureWaiting: {
+      nl: 'nog niet bevestigd',
+      en: 'not yet confirmed',
+    } as Translatable,
+    statusSignatureOk: {
+      nl: '✓ Ondertekend',
+      en: '✓ Signed',
+    } as Translatable,
     reset: { nl: 'Wis ingevulde gegevens', en: 'Clear all entered data' } as Translatable,
     resetConfirm: {
       nl: 'Weet je zeker dat je alle ingevulde gegevens wilt wissen?',
@@ -161,6 +173,43 @@ export const strings = {
       en: 'PDF generation failed. Check the console for details.',
     } as Translatable,
     restart: { nl: 'Opnieuw beginnen', en: 'Start over' } as Translatable,
+  },
+  signature: {
+    sectionLabel: { nl: 'Ondertekening', en: 'Signing' } as Translatable,
+    title: {
+      nl: 'Controleer je ondertekening',
+      en: 'Review your signing details',
+    } as Translatable,
+    lead: {
+      nl: 'Deze gegevens komen uit stap 3 en worden samen met je antwoorden in de PDF opgenomen.',
+      en: 'These details come from step 3 and will be included in the PDF alongside your answers.',
+    } as Translatable,
+    nameLabel: { nl: 'Ondertekenaar', en: 'Signatory' } as Translatable,
+    roleLabel: { nl: 'Rol / organisatie', en: 'Role / organisation' } as Translatable,
+    dateLabel: { nl: 'Datum', en: 'Date' } as Translatable,
+    missingValue: { nl: '— nog niet ingevuld —', en: '— not yet provided —' } as Translatable,
+    missingNameNotice: {
+      nl: 'Vul je naam in om het document te ondertekenen.',
+      en: 'Enter your name to sign the document.',
+    } as Translatable,
+    editAtProject: {
+      nl: 'Aanpassen bij “Over het project”',
+      en: 'Edit under “About the project”',
+    } as Translatable,
+    confirmLabel: {
+      nl: (name: string) =>
+        name.length > 0
+          ? `Ik, ${name}, onderteken hierbij dit document.`
+          : 'Ik onderteken hierbij dit document.',
+      en: (name: string) =>
+        name.length > 0
+          ? `I, ${name}, hereby sign this document.`
+          : 'I hereby sign this document.',
+    },
+    confirmHelp: {
+      nl: 'Door deze verklaring aan te vinken bevestig je je ondertekening. Een getypte naam geldt hier als handtekening — identiteit wordt niet afzonderlijk geverifieerd.',
+      en: 'Checking this declaration confirms your signature. A typed name serves as a signature here — identity is not verified separately.',
+    } as Translatable,
   },
   resume: {
     button: {
