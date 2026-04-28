@@ -56,6 +56,8 @@ export const strings = {
       en: 'Work through the seven public values below. Use the arrows or numbers to navigate — nothing needs to be filled in here, this is reading and orientation material.',
     } as Translatable,
     carouselAria: { nl: 'De zeven publieke waarden', en: 'The seven public values' } as Translatable,
+    carouselRoleDesc: { nl: 'carrousel', en: 'carousel' } as Translatable,
+    slideRoleDesc: { nl: 'dia', en: 'slide' } as Translatable,
     prev: { nl: 'Vorige waarde', en: 'Previous value' } as Translatable,
     next: { nl: 'Volgende waarde', en: 'Next value' } as Translatable,
     dotsAria: { nl: 'Kies een waarde', en: 'Choose a value' } as Translatable,
@@ -158,12 +160,24 @@ export const strings = {
       nl: '✓ Ondertekend',
       en: '✓ Signed',
     } as Translatable,
-    reset: { nl: 'Wis ingevulde gegevens', en: 'Clear all entered data' } as Translatable,
+    reset: { nl: 'Begin opnieuw', en: 'Start over' } as Translatable,
     resetConfirm: {
-      nl: 'Weet je zeker dat je alle ingevulde gegevens wilt wissen?',
-      en: 'Are you sure you want to clear all entered data?',
+      nl: 'Weet je zeker dat je opnieuw wilt beginnen? Alle ingevulde gegevens worden gewist.',
+      en: 'Are you sure you want to start over? All entered data will be cleared.',
     } as Translatable,
     download: { nl: 'Download PDF', en: 'Download PDF' } as Translatable,
+    downloadHelp: {
+      nl: 'Het formele document voor je aanvraag of offerte.',
+      en: 'The formal document for your application or quotation.',
+    } as Translatable,
+    downloadMd: {
+      nl: 'Download als Markdown',
+      en: 'Download as Markdown',
+    } as Translatable,
+    downloadMdHelp: {
+      nl: 'Een toegankelijke platte-tekstversie — handig om terug te lezen, te delen of voor screenreaders.',
+      en: 'An accessible plain-text version — handy for re-reading, sharing or for screen readers.',
+    } as Translatable,
     downloading: {
       nl: 'PDF wordt gegenereerd…',
       en: 'Generating PDF…',
@@ -172,7 +186,6 @@ export const strings = {
       nl: 'Het genereren van de PDF is mislukt. Bekijk de console voor details.',
       en: 'PDF generation failed. Check the console for details.',
     } as Translatable,
-    restart: { nl: 'Opnieuw beginnen', en: 'Start over' } as Translatable,
   },
   signature: {
     sectionLabel: { nl: 'Ondertekening', en: 'Signing' } as Translatable,
@@ -326,5 +339,13 @@ export const strings = {
     yes: { nl: 'JA', en: 'YES' } as Translatable,
     no: { nl: 'NEE', en: 'NO' } as Translatable,
     notAnswered: { nl: '—', en: '—' } as Translatable,
+    keywords: {
+      nl: 'CIIIC, publieke waarden, zelftoets, immersive experiences, Nationaal Groeifonds, richtlijn, ethiek, digitale autonomie',
+      en: 'CIIIC, public values, self-assessment, immersive experiences, National Growth Fund, guidelines, ethics, digital autonomy',
+    } as Translatable,
+    subjectLong: {
+      nl: 'Ingevulde Publieke Waarden Zelftoets — verklaring, antwoorden en bijlage met de Richtlijn (Sectie A).',
+      en: 'Completed Public Values Self-Assessment — declaration, answers and appendix with the Guidelines (Section A).',
+    } as Translatable,
   },
 } as const;

@@ -105,12 +105,20 @@ export async function generatePdf(
   const pdfMake = await loadPdfMake();
   const declaredAll = isAllDeclared(values, deps.voorwaarden.length);
 
+  // pdfmake emits untagged PDFs (no PDF/UA, no outline) — see pdfmake issue
+  // #942. The accessible re-readable artefact is the Markdown export; the web
+  // form is the accessible authoring surface. Here we only set what pdfmake
+  // exposes that screen readers can still use: /Lang via top-level language,
+  // and richer document info metadata.
   const docDefinition = {
     info: {
       title: `${appMeta.name[lang]} — ${valueOrDash(values, 'meta-project')}`,
-      author: appMeta.org,
-      subject: appMeta.name[lang],
+      author: `${appMeta.org} — ${appMeta.orgLong}`,
+      subject: strings.pdf.subjectLong[lang],
+      keywords: strings.pdf.keywords[lang],
+      creator: `${appMeta.org} ${appMeta.name[lang]}`,
     },
+    language: lang === 'en' ? 'en-GB' : 'nl-NL',
     pageSize: 'A4',
     pageMargins: [55, 80, 55, 65],
 

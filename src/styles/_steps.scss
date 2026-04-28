@@ -32,10 +32,48 @@
     line-height: 1.5;
   }
 
-  .download-actions {
+  .download-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-block: var(--gap-md) var(--gap-sm);
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+  }
+
+  .download-option {
     display: flex;
-    gap: 0.75rem;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .download-option__btn {
+    align-self: stretch;
+    justify-content: center;
+    padding-block: 1rem;
+  }
+
+  .download-option__help {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+  }
+
+  .download-meta {
+    display: flex;
+    gap: 0.65rem;
+    align-items: baseline;
     flex-wrap: wrap;
+    margin-top: var(--gap-sm);
+    font-size: 0.9rem;
+  }
+
+  .download-meta__sep {
+    color: var(--border-strong);
   }
 }
 

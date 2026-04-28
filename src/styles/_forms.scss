@@ -138,10 +138,12 @@
 .question-number {
   font-family: var(--font-mono);
   font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
   letter-spacing: 0.1em;
   color: var(--teal-mid);
   text-transform: uppercase;
-  margin-bottom: 0.35rem;
+  margin: 0 0 0.35rem;
 }
 
 .question-prompt {

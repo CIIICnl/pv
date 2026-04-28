@@ -45,22 +45,26 @@ const LANGS: Lang[] = ['nl', 'en'];
     <p class="waarden-lead" data-lang="nl">{s.lead.nl}</p>
     <p class="waarden-lead" data-lang="en">{s.lead.en}</p>
 
-    <div
+    <section
       class="waarden-carousel"
       data-pwz-carousel
-      aria-roledescription="carrousel"
+      aria-roledescription={s.carouselRoleDesc.nl}
+      data-aria-roledescription-nl={s.carouselRoleDesc.nl}
+      data-aria-roledescription-en={s.carouselRoleDesc.en}
       aria-label={s.carouselAria.nl}
       data-aria-label-nl={s.carouselAria.nl}
       data-aria-label-en={s.carouselAria.en}
     >
       <div class="waarden-carousel__viewport">
-        <ol class="waarden-carousel__track" data-pwz-carousel-track>
+        <div class="waarden-carousel__track" data-pwz-carousel-track>
           {waarden.map((w, i) => (
-            <li
+            <div
               class="waarden-carousel__slide"
               data-pwz-carousel-slide={i}
               role="group"
-              aria-roledescription="slide"
+              aria-roledescription={s.slideRoleDesc.nl}
+              data-aria-roledescription-nl={s.slideRoleDesc.nl}
+              data-aria-roledescription-en={s.slideRoleDesc.en}
               aria-label={`${w.number} van ${waarden.length}: ${w.title.nl}`}
               data-aria-label-nl={`${w.number} van ${waarden.length}: ${w.title.nl}`}
               data-aria-label-en={`${w.number} of ${waarden.length}: ${w.title.en}`}
@@ -84,9 +88,9 @@ const LANGS: Lang[] = ['nl', 'en'];
                   </div>
                 ))}
               </article>
-            </li>
+            </div>
           ))}
-        </ol>
+        </div>
       </div>
 
       <div class="waarden-carousel__controls">
@@ -136,6 +140,6 @@ const LANGS: Lang[] = ['nl', 'en'];
           <span aria-hidden="true">→</span>
         </button>
       </div>
-    </div>
+    </section>
   </div>
 </section>
