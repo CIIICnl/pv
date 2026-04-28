@@ -77,6 +77,16 @@ export function applyLang(lang: Lang): void {
     if (v) el.setAttribute('aria-label', v);
   });
 
+  // aria-roledescription rewriters
+  document
+    .querySelectorAll<HTMLElement>(`[data-aria-roledescription-${lang}]`)
+    .forEach((el) => {
+      const v = el.dataset[
+        `ariaRoledescription${suffix}` as 'ariaRoledescriptionNl' | 'ariaRoledescriptionEn'
+      ];
+      if (v) el.setAttribute('aria-roledescription', v);
+    });
+
   // option/label text rewriters
   document.querySelectorAll<HTMLElement>(`[data-label-${lang}]`).forEach((el) => {
     const v = el.dataset[`label${suffix}` as 'labelNl' | 'labelEn'];

@@ -28,10 +28,10 @@ const s = strings.vragen;
           const promptIdEn = promptId ? `${promptId}-en` : undefined;
           return (
             <div class="question" id={v.id}>
-              <div class="question-number">
+              <h4 class="question-number">
                 <span data-lang="nl">{s.questionPrefix.nl} {v.number}</span>
                 <span data-lang="en">{s.questionPrefix.en} {v.number}</span>
-              </div>
+              </h4>
 
               {v.intro && (
                 <>

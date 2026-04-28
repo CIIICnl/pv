@@ -14,10 +14,11 @@ function ensureDialog(): HTMLDialogElement {
 
   el = document.createElement('dialog');
   el.className = 'pwz-dialog pwz-resume';
+  el.setAttribute('aria-labelledby', 'pwz-resume-title');
   el.innerHTML = `
     <form class="pwz-resume__form" novalidate>
       <header class="pwz-resume__header">
-        <h2 class="pwz-resume__title">
+        <h2 class="pwz-resume__title" id="pwz-resume-title">
           <span data-lang="nl">${r.title.nl}</span>
           <span data-lang="en">${r.title.en}</span>
         </h2>
@@ -28,7 +29,7 @@ function ensureDialog(): HTMLDialogElement {
           aria-label="${r.close.nl}"
           data-aria-label-nl="${r.close.nl}"
           data-aria-label-en="${r.close.en}"
-        >&times;</button>
+        ><span aria-hidden="true">&times;</span></button>
       </header>
 
       <div class="pwz-resume__body" data-pwz-resume-view="form">

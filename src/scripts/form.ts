@@ -1,4 +1,5 @@
 import { generatePdf } from './pdf';
+import { downloadMarkdown } from './markdown';
 import { voorwaarden } from '../data/pwz';
 import { strings } from '../data/strings';
 import { readForm, writeForm, clearFormFields } from './form-io';
@@ -60,6 +61,7 @@ async function reset(): Promise<void> {
   clearStoredForm();
   syncFollowups();
   updateStatus();
+  goToStep(1);
 }
 
 async function download(): Promise<void> {
@@ -116,6 +118,10 @@ export function initForm(): void {
 
   document.getElementById('pwz-reset')?.addEventListener('click', () => void reset());
   document.getElementById('pwz-download')?.addEventListener('click', () => void download());
+  document.getElementById('pwz-download-md')?.addEventListener('click', () => {
+    const lang = currentLang();
+    downloadMarkdown(readForm(), { voorwaarden: voorwaarden[lang] }, lang);
+  });
   bindResumeButton();
 
   void restoreDraftFromUrl();

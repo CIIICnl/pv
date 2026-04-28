@@ -133,31 +133,52 @@ const sig = strings.signature;
       </span>
     </div>
 
-    <div class="download-actions">
-      <button class="btn btn-ghost" id="pwz-reset" type="button">
-        <span data-lang="nl">{s.reset.nl}</span>
-        <span data-lang="en">{s.reset.en}</span>
-      </button>
-      <button class="btn btn-ghost" id="pwz-save-resume" type="button">
+    <div class="download-options">
+      <div class="download-option">
+        <button
+          class="btn btn-primary download-option__btn"
+          id="pwz-download"
+          type="button"
+          disabled
+          aria-describedby="pwz-status pwz-download-help"
+        >
+          <span data-lang="nl">{s.download.nl}</span>
+          <span data-lang="en">{s.download.en}</span>
+        </button>
+        <p class="download-option__help" id="pwz-download-help">
+          <span data-lang="nl">{s.downloadHelp.nl}</span>
+          <span data-lang="en">{s.downloadHelp.en}</span>
+        </p>
+      </div>
+      <div class="download-option">
+        <button
+          class="btn btn-ghost download-option__btn"
+          id="pwz-download-md"
+          type="button"
+          aria-describedby="pwz-download-md-help"
+        >
+          <span data-lang="nl">{s.downloadMd.nl}</span>
+          <span data-lang="en">{s.downloadMd.en}</span>
+        </button>
+        <p class="download-option__help" id="pwz-download-md-help">
+          <span data-lang="nl">{s.downloadMdHelp.nl}</span>
+          <span data-lang="en">{s.downloadMdHelp.en}</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="download-meta">
+      <button class="link-btn" id="pwz-save-resume" type="button">
         <span data-lang="nl">{r.button.nl}</span>
         <span data-lang="en">{r.button.en}</span>
       </button>
-      <button class="btn btn-primary" id="pwz-download" type="button" disabled aria-describedby="pwz-status">
-        <span data-lang="nl">{s.download.nl}</span>
-        <span data-lang="en">{s.download.en}</span>
+      <span class="download-meta__sep" aria-hidden="true">·</span>
+      <button class="link-btn" id="pwz-reset" type="button">
+        <span data-lang="nl">{s.reset.nl}</span>
+        <span data-lang="en">{s.reset.en}</span>
       </button>
     </div>
   </div>
 
-  <StepFooter current={TOTAL_STEPS} total={TOTAL_STEPS} prevLabel={prevLabel(TOTAL_STEPS)}>
-    <button
-      type="button"
-      class="btn btn-ghost"
-      data-pwz-step-goto="1"
-      slot="extra"
-    >
-      <span data-lang="nl">{s.restart.nl}</span>
-      <span data-lang="en">{s.restart.en}</span>
-    </button>
-  </StepFooter>
+  <StepFooter current={TOTAL_STEPS} total={TOTAL_STEPS} prevLabel={prevLabel(TOTAL_STEPS)} />
 </section>
